@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #030818;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #030a18;
+    --foreground: #ededed;
+  }
+}
+
+@font-face {
+  font-family: "SupplyBold";
+  src: url("/fonts/SupplyBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SupplyMedium";
+  src: url("/fonts/Supply-Medium.otf") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SupplyLight";
+  src: url("/fonts/SupplySuperLight.woff2") format("woff2");
+
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SupplyRegular";
+  src: url("/fonts/SupplyBold2.woff2") format("woff2");
+
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-supply), Arial, Helvetica, sans-serif;
+
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+@keyframes loading-bar {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+.animate-loading-bar {
+  animation: loading-bar 2s ease-in-out infinite;
+}

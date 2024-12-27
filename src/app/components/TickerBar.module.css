@@ -1,0 +1,27 @@
+.tickerWrap {
+  width: 100%;
+  overflow: hidden;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.ticker {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker 20s linear infinite;
+}
+
+.ticker > div {
+  display: inline-block;
+}
+
+.ticker:hover {
+  animation-play-state: paused;
+}
