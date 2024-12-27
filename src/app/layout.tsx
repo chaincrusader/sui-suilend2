@@ -7,7 +7,7 @@ import ClientProviders from "./components/ClientProviders";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Suilend | SEND Airdrop",
+  title: "Suilend | SEND Season 2 Airdrop",
   description: "Claim your allocated SEND.",
   viewport:
     "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     description: "Claim your allocated SEND.",
     type: "website",
-    title: "Suilend | Lend and borrow crypto on Sui",
+    title: "Suilend | SEND Season 2 Airdrop",
     images: [
       {
         url: "https://i.imgur.com/m7KPM4B.png",
