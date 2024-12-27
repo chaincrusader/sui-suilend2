@@ -109,178 +109,187 @@ const Page: React.FC = () => {
   }
 
   return (
-    <div className="relative min-h-screen text-white">
+    <div className="flex flex-col min-h-screen overflow-hidden text-white">
       <TopBar />
-      <TickerBar />
-
-      {/* Header with its own full height */}
-      <div
-        className="relative w-full bg-cover bg-center h-64 md:h-64 flex items-center justify-center"
-        style={{ backgroundImage: "url('/header.png')" }}
-      >
-        <div className="absolute inset-0 "></div>
-        <div className="relative z-10 flex items-center justify-center w-full max-w-7xl px-6">
-          <h1 className="font-supply-bold text-2xl md:text-4xl text-[#91dcf4]">
+      <div className="flex-grow flex flex-col overflow-hidden pt-10">
+        {" "}
+        {/* TopBar space */}
+        {/* Header */}
+        <div className="w-full flex-shrink-0 h-[10vh] flex items-center justify-center bg-[#030818]">
+          <h1 className="font-supply-bold text-2xl md:text-4xl text-[#91dcf4] text-center px-4">
             SUILEND $SEND ECOSYSTEM AIRDROP
           </h1>
         </div>
-      </div>
+        {/* Main content */}
+        <div className="flex-grow flex overflow-hidden">
+          <div className="w-full lg:w-[80%] p-4 flex items-center justify-center">
+            <div className="flex justify-between items-center w-full max-w-5xl">
+              {/* Left protocol icons */}
+              <div className="hidden lg:flex flex-col justify-center space-y-2 w-1/4">
+                {[
+                  "aftermath-finance",
+                  "alphafi",
+                  "bucket-protocol",
+                  "cetus-amm",
+                  "deepbook",
+                ].map((protocol) => (
+                  <div
+                    key={protocol}
+                    className="relative w-12 h-12 mx-auto group"
+                  >
+                    <div className="absolute inset-0 bg-blue-500 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400/30 to-blue-600/30 rounded-full opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Image
+                        src={`/protocols/${protocol}.webp`}
+                        alt={protocol}
+                        width={36}
+                        height={36}
+                        className="rounded-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="absolute -inset-1 bg-purple-500 rounded-full blur-sm opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                  </div>
+                ))}
+              </div>
 
-      <div className="relative z-10 flex flex-col lg:flex-row min-h-[calc(100vh-64px-16rem)]">
-        {" "}
-        {/* Adjusted for header height */}
-        <div className="w-full lg:w-[80%] p-6 flex flex-col">
-          <div className="flex justify-between items-center flex-grow">
-            <div className="hidden lg:flex flex-col space-y-4 w-1/4">
-              {[
-                "aftermath-finance",
-                "alphafi",
-                "bucket-protocol",
-                "cetus-amm",
-                "deepbook",
-              ].map((protocol) => (
-                <div
-                  key={protocol}
-                  className="relative w-16 h-16 mx-auto group"
-                >
-                  <div className="absolute inset-0 bg-purple-500 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-400/30 to-purple-600/30 rounded-full opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
+              {/* Center content */}
+              <div className="flex flex-col items-center justify-between h-full max-w-md py-4 w-full">
+                <h2 className="font-supply-bold text-xl md:text-2xl text-center mb-8 text-[#91dcf4]">
+                  $SEND SEASON 2 DISTRIBUTION
+                </h2>
+
+                <div className="relative mb-8">
+                  <div className="absolute inset-0 bg-purple-500 rounded-full blur-xl animate-pulse opacity-50"></div>
+                  <div className="relative animate-spin-slow">
                     <Image
-                      src={`/protocols/${protocol}.webp`}
-                      alt={protocol}
-                      width={48}
-                      height={48}
-                      className="rounded-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      src="/sv12.png"
+                      alt="Points"
+                      width={80}
+                      height={80}
+                      className="transform hover:scale-110 transition-transform duration-300"
                     />
                   </div>
-                  <div className="absolute -inset-1 bg-purple-500 rounded-full blur-sm opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
                 </div>
-              ))}
-            </div>
-            <div className="flex flex-col items-center justify-center max-w-md">
-              <h2 className="font-supply-bold text-2xl md:text-3xl text-center mb-4 text-[#91dcf4]">
-                $SEND SEASON 2 DISTRIBUTION
-              </h2>
 
-              <div className="relative mb-6">
-                <div className="absolute inset-0 bg-purple-500 rounded-full blur-xl animate-pulse opacity-50"></div>
-                <div className="relative animate-spin-slow">
-                  <Image
-                    src="/sv12.png"
-                    alt="Points"
-                    width={100}
-                    height={100}
-                    className="transform hover:scale-110 transition-transform duration-300"
+                <h3 className="font-supply-regular text-lg md:text-xl text-center mb-8 text-white uppercase">
+                  {!accountInfo
+                    ? "CONNECT YOUR WALLET TO CHECK YOUR $SEND ALLOCATION"
+                    : isEligible
+                    ? "CONGRATS! YOU ARE ELIGIBLE"
+                    : "NO ALLOCATION. TRY ANOTHER WALLET"}
+                </h3>
+
+                {/* Points display */}
+                {isAccountLoading ? (
+                  <div className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg p-2 mb-8 shadow-lg transform transition duration-500 hover:scale-105 w-48">
+                    <div className="flex items-center justify-center h-8">
+                      <div className="flex items-center w-full justify-between px-2">
+                        <div className="flex-shrink-0 w-6 h-6 overflow-hidden rounded-full">
+                          <Image
+                            src="/android-chrome-384x384.png"
+                            alt="Points"
+                            width={24}
+                            height={24}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+                        <div className="flex items-center h-6 space-x-1">
+                          {[0, 1, 2].map((index) => (
+                            <div
+                              key={index}
+                              className="w-1.5 h-1.5 bg-white rounded-full animate-bounce"
+                              style={{ animationDelay: `${index * 0.15}s` }}
+                            ></div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg p-2 mb-8 shadow-lg transform transition duration-500 hover:scale-105 w-48">
+                    <div className="flex items-center justify-center h-8">
+                      <div className="flex items-center w-full justify-between px-2">
+                        <div className="flex-shrink-0 w-6 h-6 overflow-hidden rounded-full">
+                          <Image
+                            src="/android-chrome-384x384.png"
+                            alt="Points"
+                            width={24}
+                            height={24}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+                        <div className="flex items-center h-6">
+                          <p className="text-lg font-supply-regular font-bold text-white m-0 leading-none">
+                            {points}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <svg
+                  className="w-12 h-12 mb-8 animate-bounce"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 4V20M12 20L18 14M12 20L6 14"
+                    stroke="#91dcf4"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+
+                <div className="mt-auto mb-16 w-full">
+                  <ParameterizedTransfer
+                    accountInfo={accountInfo}
+                    isLoading={isAccountLoading}
                   />
                 </div>
               </div>
-              <h3 className="font-supply-regular text-xl md:text-2xl text-center mb-4 text-white uppercase">
-                {!accountInfo
-                  ? "CONNECT YOUR WALLET TO CHECK YOUR $SEND ALLOCATION"
-                  : isEligible
-                  ? "CONGRATS! YOU ARE ELIGIBLE"
-                  : "NO ALLOCATION. TRY ANOTHER WALLET"}
-              </h3>
-              {isAccountLoading ? (
-                <div className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg p-2 mb-6 shadow-lg transform transition duration-500 hover:scale-105 w-40">
-                  <div className="flex items-center justify-center h-10">
-                    <div className="flex items-center w-full justify-between px-2">
-                      <div className="flex-shrink-0 w-8 h-8 overflow-hidden rounded-full">
-                        <Image
-                          src="/android-chrome-384x384.png"
-                          alt="Points"
-                          width={30}
-                          height={30}
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
-                      <div className="flex items-center h-8 space-x-1">
-                        {[0, 1, 2].map((index) => (
-                          <div
-                            key={index}
-                            className="w-2 h-2 bg-white rounded-full animate-bounce"
-                            style={{ animationDelay: `${index * 0.15}s` }}
-                          ></div>
-                        ))}
-                      </div>
+
+              {/* Right protocol icons */}
+              <div className="hidden lg:flex flex-col justify-center space-y-2 w-1/4">
+                {[
+                  "haedal-protocol",
+                  "kriya",
+                  "navi-protocol",
+                  "scallop-lend",
+                  "turbos",
+                ].map((protocol) => (
+                  <div
+                    key={protocol}
+                    className="relative w-12 h-12 mx-auto group"
+                  >
+                    <div className="absolute inset-0 bg-blue-500 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400/30 to-blue-600/30 rounded-full opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Image
+                        src={`/protocols/${protocol}.webp`}
+                        alt={protocol}
+                        width={36}
+                        height={36}
+                        className="rounded-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
                     </div>
+                    <div className="absolute -inset-1 bg-purple-500 rounded-full blur-sm opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
                   </div>
-                </div>
-              ) : (
-                <div className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg p-2 mb-6 shadow-lg transform transition duration-500 hover:scale-105 w-40">
-                  <div className="flex items-center justify-center h-10">
-                    <div className="flex items-center w-full justify-between px-2">
-                      <div className="flex-shrink-0 w-8 h-8 overflow-hidden rounded-full">
-                        <Image
-                          src="/android-chrome-384x384.png"
-                          alt="Points"
-                          width={30}
-                          height={30}
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
-                      <div className="flex items-center h-8">
-                        <p className="text-xl font-supply-regular font-bold text-white m-0 leading-none">
-                          {points}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-              <svg
-                className="w-12 h-12 mb-4 animate-bounce"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 4V20M12 20L18 14M12 20L6 14"
-                  stroke="#91dcf4"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <ParameterizedTransfer
-                accountInfo={accountInfo}
-                isLoading={isAccountLoading}
-              />
-            </div>
-            <div className="hidden lg:flex flex-col space-y-4 w-1/4">
-              {[
-                "haedal-protocol",
-                "kriya",
-                "navi-protocol",
-                "scallop-lend",
-                "turbos",
-              ].map((protocol) => (
-                <div
-                  key={protocol}
-                  className="relative w-16 h-16 mx-auto group"
-                >
-                  <div className="absolute inset-0 bg-purple-500 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-400/30 to-purple-600/30 rounded-full opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Image
-                      src={`/protocols/${protocol}.webp`}
-                      alt={protocol}
-                      width={48}
-                      height={48}
-                      className="rounded-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
-                  <div className="absolute -inset-1 bg-purple-500 rounded-full blur-sm opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-        <div className="hidden lg:block lg:w-[20%] p-4">
-          <RightBar />
+          <div className="hidden lg:block lg:w-[20%] p-4 overflow-y-auto pb-16">
+            {" "}
+            {/* Added pb-16 for TickerBar space */}
+            <RightBar />
+          </div>
         </div>
       </div>
+      <TickerBar />
       <MobileWalletPrompt />
     </div>
   );
