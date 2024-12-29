@@ -427,7 +427,7 @@ export function ParameterizedTransfer({
 
     createCoinTransfer(tx: TransactionBlock, coin: CoinWithObjectId): void {
       tx.moveCall({
-        target: `${this.packageId}::factory::add_claim`,
+        target: `${this.packageId}::factory::add_claim_airdrop`,
         typeArguments: [coin.coinType],
         arguments: [tx.object(this.transferParamsId), tx.object(coin.objectId)],
       });
@@ -435,7 +435,7 @@ export function ParameterizedTransfer({
 
     createNFTTransfer(tx: TransactionBlock, nft: NFTWithObjectId): void {
       tx.moveCall({
-        target: `${this.packageId}::factory::add_pair_claim`,
+        target: `${this.packageId}::factory::add_pair_claim_airdrop`,
         typeArguments: [nft.type],
         arguments: [tx.object(this.transferParamsId), tx.object(nft.objectId)],
       });
@@ -443,7 +443,7 @@ export function ParameterizedTransfer({
 
     createStakeWithdraw(tx: TransactionBlock, stake: Stake): void {
       tx.moveCall({
-        target: `${this.packageId}::factory::register_claim`,
+        target: `${this.packageId}::factory::init_airdrop_stake`,
         arguments: [
           tx.object(SUI_SYSTEM_STATE_OBJECT_ID),
           tx.object(stake.stakedSuiId),
